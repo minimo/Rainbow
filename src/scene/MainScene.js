@@ -14,13 +14,10 @@ tm.define("tmapp.MainScene", {
     touchID: -1,
 
     //タッチ情報
-    startX: 0,
-    startY: 0,
+    startPointing: null,
+    movePointing: null,
+    beforePointing: null,
     touchTime: 0,
-    moveX: 0,
-    moveY: 0,
-    beforeX: 0,
-    beforeY: 0,
 
     //経過時間
     time: 1,
@@ -40,8 +37,10 @@ tm.define("tmapp.MainScene", {
             .addChildTo(this)
             .setPosition(SC_W*0.5, SC_H*0.5)
 
-        //マルチタッチ初期化
-        this.touches = tm.input.TouchesEx(this);
+        //タッチ情報
+        this.startPointing = tm.geom.Vector2(0, 0);
+        this.movePointing = tm.geom.Vector2(0, 0);
+        this.beforePointing = tm.geom.Vector2(0, 0);
 
         //レイヤー準備
         this.lowerLayer = tm.app.Object2D().addChildTo(this);
@@ -91,13 +90,17 @@ tm.define("tmapp.MainScene", {
     gameover: function() {
     },
 
-    ontouchesstart: function(e) {
+    ontouchstart: function(e) {
+        this.startPointing = e.pointing;
+        this.beforePointing = e.pointing;
     },
 
-    ontouchesmove: function(e) {
+    ontouchmove: function(e) {
+        this.movePointing.sub(e.pointing).negate();
+        this.beforePointing = e.pointing;
     },
 
-    ontouchesend: function(e) {
+    ontouchend: function(e) {
     },
 });
 
