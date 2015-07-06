@@ -73,11 +73,9 @@ tm.define("tmapp.MainScene", {
                 appMain.pushScene(tmapp.PauseScene(this));
             }.bind(this));
 
-        this.sprite = tm.display.AnimationSprite(tmapp.SpriteSheet.Hiyoko)
+        this.player = tmapp.Player()
             .addChildTo(this)
-            .setPosition(SC_W/2, SC_H/2)
-            .setScale(4)
-            .gotoAndPlay("test");
+            .setPosition(SC_W/2, SC_H/2);
 
         //目隠し
         this.mask = tm.display.RectangleShape({width: SC_W, height: SC_H, fillStyle: "rgba(0, 0, 0, 1.0)", strokeStyle: "rgba(0, 0, 0, 1.0)"})
