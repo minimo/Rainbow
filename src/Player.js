@@ -52,6 +52,8 @@ tm.define("tmapp.Player", {
         angle = angle % 360;
         if (angle < 0) angle += 360;
         this._angle = angle;
+
+        this.sprite.rotation = -this._angle;
     },
 });
 

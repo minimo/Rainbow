@@ -91,13 +91,11 @@ tm.define("tmapp.MainScene", {
     },
 
     ontouchstart: function(e) {
-        this.startPointing = e.pointing;
-        this.beforePointing = e.pointing;
     },
 
     ontouchmove: function(e) {
-        this.movePointing.sub(e.pointing).negate();
-        this.beforePointing = e.pointing;
+        var len = e.pointing.deltaPosition.length()/2;
+        this.player.angle += len;
     },
 
     ontouchend: function(e) {
