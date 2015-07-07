@@ -13,12 +13,6 @@ tm.define("tmapp.MainScene", {
     touches: null,
     touchID: -1,
 
-    //タッチ情報
-    startPointing: null,
-    movePointing: null,
-    beforePointing: null,
-    touchTime: 0,
-
     //経過時間
     time: 1,
 
@@ -94,8 +88,18 @@ tm.define("tmapp.MainScene", {
     },
 
     ontouchmove: function(e) {
-        var len = e.pointing.deltaPosition.length()/2;
-        this.player.angle += len;
+        var dp = e.pointing.deltaPosition;
+        var len = dp.length()*0.2;
+        if (len < 1) {
+        } else {
+            if (Math.abs(dp.x) > Math.abs(dp.y)) {
+                len = dp.x;
+            } else {
+                len = dp.y;
+            }
+            var ag = this.player.angle+len;
+            this.player.tweener.clear().to({angle: ag}, 300,"easeOutSine");
+        }
     },
 
     ontouchend: function(e) {

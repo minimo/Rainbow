@@ -43,8 +43,8 @@ tm.define("tmapp.Player", {
     },
 
     update: function() {
-        this.x = Math.sin(this._angle*toRad)*320+SC_W/2;
-        this.y = Math.cos(this._angle*toRad)*320+SC_H/2;
+        this.x = Math.sin(this._angle*toRad)*250+SC_W/2;
+        this.y = Math.cos(this._angle*toRad)*250+SC_H/2;
         this.time++;
     },
 
